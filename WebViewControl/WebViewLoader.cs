@@ -37,10 +37,11 @@ namespace WebViewControl {
                 CachePath = settings.CachePath, // enable cache for external resources to speedup loading
                 WindowlessRenderingEnabled = settings.OsrEnabled,
                 RemoteDebuggingPort = settings.GetRemoteDebuggingPort(),
-                UserAgent = settings.UserAgent
+                UserAgent = settings.UserAgent,
+                BackgroundColor = new CefColor((uint)settings.BackgroundColor.ToArgb())
             };
 
-            var customSchemes = CustomSchemes.Select(s => new CustomScheme() {
+            var customSchemes = CustomSchemes.Concat(settings.Schemes).Select(s => new CustomScheme() {
                 SchemeName = s,
                 SchemeHandlerFactory = new SchemeHandlerFactory()
             }).ToArray();
