@@ -116,6 +116,7 @@ namespace WebViewControl {
             Initialize();
         }
 
+        public class EmptyClass;
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void Initialize() {
             WebViewLoader.Initialize(Settings);
@@ -263,6 +264,8 @@ namespace WebViewControl {
         public bool DisableFileDialogs { get; set; }
 
         public bool IsBrowserInitialized => chromium.IsBrowserInitialized;
+
+        public ChromiumBrowser Browser => chromium;
 
         public bool IsJavascriptEngineInitialized => chromium.IsJavascriptEngineInitialized;
 
@@ -448,7 +451,6 @@ namespace WebViewControl {
             if (isDisposing) {
                 return;
             }
-
             ExecuteWithAsyncErrorHandling(() => {
                 if (UrlHelper.IsChromeInternalUrl(frame.Url)) {
                     return;
