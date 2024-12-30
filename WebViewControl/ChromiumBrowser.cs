@@ -4,6 +4,8 @@ namespace WebViewControl {
 
     public partial class ChromiumBrowser {
 
-        public CefBrowser GetBrowser() => UnderlyingBrowser;
+        public CefBrowser GetBrowser() {
+            return UnderlyingBrowser;
+        }
     }
 }

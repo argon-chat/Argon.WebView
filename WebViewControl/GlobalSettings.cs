@@ -8,7 +8,7 @@ namespace WebViewControl {
 
     public class GlobalSettings {
 
-        private bool persistCache;
+        private bool persistCache = true;
         private bool enableErrorLogOnly;
         private bool osrEnabled = false;
         private string userAgent;

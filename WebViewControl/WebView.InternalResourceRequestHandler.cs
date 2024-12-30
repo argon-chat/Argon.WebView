@@ -57,6 +57,28 @@ namespace WebViewControl {
                             OwnerWebView.ForwardUnhandledAsyncException(new InvalidOperationException("Resource not found: " + url));
                         }
                     });
+                } else if (Uri.TryCreate(resourceHandler.Url, UriKind.Absolute, out var urlApp) && urlApp.Scheme == ResourceUrl.AppScheme) {
+                    resourceHandler.BeginAsyncResponse(() => {
+                        var urlWithoutQuery = new UriBuilder(urlApp);
+                        if (!string.IsNullOrEmpty(urlApp.Query)) {
+                            urlWithoutQuery.Query = string.Empty;
+                        }
+
+                        OwnerWebView.ExecuteWithAsyncErrorHandling(() => resourceHandler.LoadEmbeddedResource(urlWithoutQuery.Uri));
+
+                        TriggerBeforeResourceLoadEvent();
+
+                        if (resourceHandler.Handled || OwnerWebView.IgnoreMissingResources) {
+                            return;
+                        }
+
+                        var resourceLoadFailed = OwnerWebView.ResourceLoadFailed;
+                        if (resourceLoadFailed != null) {
+                            resourceLoadFailed(urlApp.ToString());
+                        } else {
+                            OwnerWebView.ForwardUnhandledAsyncException(new InvalidOperationException("Resource not found: " + urlApp));
+                        }
+                    });
                 } else {
                     TriggerBeforeResourceLoadEvent();
                 }

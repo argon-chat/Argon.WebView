@@ -38,7 +38,10 @@ namespace WebViewControl {
                 WindowlessRenderingEnabled = settings.OsrEnabled,
                 RemoteDebuggingPort = settings.GetRemoteDebuggingPort(),
                 UserAgent = settings.UserAgent,
-                BackgroundColor = new CefColor((uint)settings.BackgroundColor.ToArgb())
+                BackgroundColor = new CefColor((uint)settings.BackgroundColor.ToArgb()),
+                PersistSessionCookies = true,
+                PersistUserPreferences = true,
+                NoSandbox = true
             };
 
             var customSchemes = CustomSchemes.Concat(settings.Schemes).Select(s => new CustomScheme() {

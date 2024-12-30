@@ -93,6 +93,7 @@ namespace WebViewControl {
                 }
                 return ResourceRequestHandler;
             }
+
         }
     }
 }

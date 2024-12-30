@@ -10,6 +10,7 @@ namespace WebViewControl {
         public const string CustomScheme = "custom";
 
         internal const string EmbeddedScheme = "embedded";
+        internal const string AppScheme = "app";
         internal const string PathSeparator = "/";
 
         private const string AssemblyPathSeparator = ";";
