@@ -11,11 +11,11 @@ namespace WebViewControl {
 
         private readonly object syncRoot = new object();
 
-        internal ResourceHandler(CefRequest request, string urlOverride)
+        public ResourceHandler(CefRequest request, string urlOverride)
             : base(request, urlOverride) {
         }
 
-        internal AsyncResourceHandler Handler { get; private set; }
+        public AsyncResourceHandler Handler { get; private set; }
 
         public bool Handled { get; private set; }
 

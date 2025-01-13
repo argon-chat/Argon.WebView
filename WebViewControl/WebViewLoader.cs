@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -33,7 +33,7 @@ namespace WebViewControl {
             var cefSettings = new CefSettings {
                 LogSeverity = string.IsNullOrWhiteSpace(settings.LogFile) ? CefLogSeverity.Disable : (settings.EnableErrorLogOnly ? CefLogSeverity.Error : CefLogSeverity.Verbose),
                 LogFile = settings.LogFile,
-                UncaughtExceptionStackSize = 100, // enable stack capture
+                UncaughtExceptionStackSize = 10000, // enable stack capture
                 CachePath = settings.CachePath, // enable cache for external resources to speedup loading
                 WindowlessRenderingEnabled = settings.OsrEnabled,
                 RemoteDebuggingPort = settings.GetRemoteDebuggingPort(),
@@ -41,7 +41,10 @@ namespace WebViewControl {
                 BackgroundColor = new CefColor((uint)settings.BackgroundColor.ToArgb()),
                 PersistSessionCookies = true,
                 PersistUserPreferences = true,
-                NoSandbox = true
+                NoSandbox = true,
+                ExternalMessagePump = false,
+                JavaScriptFlags = "--expose_gc"
+
             };
 
             var customSchemes = CustomSchemes.Concat(settings.Schemes).Select(s => new CustomScheme() {

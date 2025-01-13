@@ -5,7 +5,7 @@ using Xilium.CefGlue.Common.Handlers;
 
 namespace WebViewControl {
 
-    internal class AsyncResourceHandler : DefaultResourceHandler {
+    public class AsyncResourceHandler : DefaultResourceHandler {
 
         private CefCallback responseCallback;
         private bool autoDisposeStream;

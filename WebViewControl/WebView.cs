@@ -520,7 +520,7 @@ namespace WebViewControl {
             }
         }
 
-        protected virtual string GetRequestUrl(string url, ResourceType resourceType) => url;
+        public virtual string GetRequestUrl(string url, ResourceType resourceType) => url;
 
         /// <summary>
         /// Called when the webview has received focus.

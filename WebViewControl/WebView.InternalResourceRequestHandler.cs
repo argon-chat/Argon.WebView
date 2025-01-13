@@ -3,6 +3,13 @@ using Xilium.CefGlue;
 
 namespace WebViewControl {
 
+    public interface ICefExternalHandlerLoader {
+        CefResourceHandler Load(WebView ownerWebView, CefBrowser browser, CefFrame frame, CefRequest request);
+    }
+    public static class CefResourceHandlerLockup {
+        public static ICefExternalHandlerLoader Loader;
+    }
+
     partial class WebView {
 
         private class InternalResourceRequestHandler : CefResourceRequestHandler {
@@ -20,6 +27,10 @@ namespace WebViewControl {
             protected override CefResourceHandler GetResourceHandler(CefBrowser browser, CefFrame frame, CefRequest request) {
                 if (request.Url == OwnerWebView.DefaultLocalUrl) {
                     return AsyncResourceHandler.FromText(OwnerWebView.htmlToLoad  ?? "");
+                }
+
+                if (request.Url.StartsWith("https://index") && CefResourceHandlerLockup.Loader is not null) {
+                    return CefResourceHandlerLockup.Loader.Load(OwnerWebView, browser, frame, request);
                 }
 
                 if (UrlHelper.IsChromeInternalUrl(request.Url)) {
