@@ -13,8 +13,8 @@ namespace WebViewControl {
                 OwnerWebView = owner;
             }
 
-            protected override void OnBeforeDownload(CefBrowser browser, CefDownloadItem downloadItem, string suggestedName, CefBeforeDownloadCallback callback) {
-                callback.Continue(downloadItem.SuggestedFileName, showDialog: true);
+            protected override bool CanDownload(CefBrowser browser, string url, string requestMethod) {
+                return true;
             }
 
             protected override void OnDownloadUpdated(CefBrowser browser, CefDownloadItem downloadItem, CefDownloadItemCallback callback) {

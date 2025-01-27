@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetDotnetVersion>net8.0</TargetDotnetVersion>
     <Platforms>x64;ARM64</Platforms>
-    <AvaloniaVersion>11.2.0</AvaloniaVersion>
+    <AvaloniaVersion>11.2.3</AvaloniaVersion>
     <CefGlueVersion>120.6099.207</CefGlueVersion>
   </PropertyGroup>
 

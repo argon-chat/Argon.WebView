@@ -6,7 +6,7 @@ namespace WebViewControl {
     internal static class WebViewExtensions {
 
         public static string[] GetFrameNames(this WebView webview) {
-            return webview.GetCefBrowser()?.GetFrameNames().Where(n => !webview.IsMainFrame(n)).ToArray() ?? new string[0];
+            return webview.GetCefBrowser()?.GetFrameNames().Where(n => !webview.IsMainFrame(n)).ToArray() ?? [];
         }
 
         internal static bool HasFrame(this WebView webview, string name) {
@@ -14,7 +14,7 @@ namespace WebViewControl {
         }
 
         internal static CefFrame GetFrame(this WebView webview, string frameName) {
-            return webview.GetCefBrowser()?.GetFrame(frameName ?? "");
+            return webview.GetCefBrowser()?.GetFrameByName(frameName ?? "");
         }
 
         internal static bool IsMainFrame(this WebView webview, string frameName) {
