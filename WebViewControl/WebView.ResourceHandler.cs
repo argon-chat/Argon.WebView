@@ -1,19 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xilium.CefGlue;
 
 namespace WebViewControl {
 
-    public sealed class ResourceHandler : Request {
+    public sealed class ResourceHandler(CefRequest request, string urlOverride) : Request(request, urlOverride) {
 
         private bool isAsync;
+        public static readonly Dictionary<string, string> DefaultHeaders = new();
 
         private readonly object syncRoot = new object();
-
-        public ResourceHandler(CefRequest request, string urlOverride)
-            : base(request, urlOverride) {
-        }
 
         public AsyncResourceHandler Handler { get; private set; }
 
